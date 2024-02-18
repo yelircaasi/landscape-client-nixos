@@ -5,10 +5,9 @@ import unittest
 from unittest import mock
 
 from landscape.lib import testing
-from landscape.lib.apt.package.store import HashIdStore
-from landscape.lib.apt.package.store import InvalidHashIdDb
-from landscape.lib.apt.package.store import PackageStore
-from landscape.lib.apt.package.store import UnknownHashIDRequest
+from landscape.lib.apt.package.store import (HashIdStore, InvalidHashIdDb,
+                                             PackageStore,
+                                             UnknownHashIDRequest)
 
 
 class BaseTestCase(testing.FSTestCase, unittest.TestCase):
