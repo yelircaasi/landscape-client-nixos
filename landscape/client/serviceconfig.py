@@ -18,7 +18,8 @@ SERVICE_NAME = "landscape-client"
 SYSTEMD_SERVICE = f"{SERVICE_NAME}.service"
 
 SNAPCTL = "/usr/bin/snapctl"
-SYSTEMCTL = "/usr/bin/systemctl"
+# SYSTEMCTL = "/usr/bin/systemctl"
+SYSTEMCTL = "/run/current-system/sw/bin/systemctl"
 
 
 class ServiceConfigException(Exception):

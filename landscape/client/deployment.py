@@ -37,7 +37,7 @@ class BaseConfiguration(_BaseConfiguration):
 
     version = VERSION
 
-    default_config_filename = "/etc/landscape/client.conf"
+    default_config_filename = f"{os.path.expanduser('~')}/.config/landscape/client.conf"
     if _is_script():
         default_config_filenames = (
             "landscape-client.conf",

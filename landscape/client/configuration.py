@@ -537,13 +537,13 @@ class LandscapeSetupScript:
         self.show_summary()
 
 
-def stop_client_and_disable_init_script():
+def stop_client():
     """
     Stop landscape-client and change configuration to prevent starting
     landscape-client on boot.
     """
     ServiceConfig.stop_landscape()
-    ServiceConfig.set_start_on_boot(False)
+    # ServiceConfig.set_start_on_boot(False)
 
 
 def setup_http_proxy(config):
@@ -608,11 +608,12 @@ def setup(config):
     """
     bootstrap_tree(config)
 
-    if not config.no_start:
-        if config.silent:
-            ServiceConfig.set_start_on_boot(True)
-        elif not ServiceConfig.is_configured_to_run():
-            ServiceConfig.set_start_on_boot(True)
+    # Below is unnecessary due to NixOS management of services:
+    # if not config.no_start:
+    #     if config.silent:
+    #         ServiceConfig.set_start_on_boot(True)
+    #     elif not ServiceConfig.is_configured_to_run():
+    #         ServiceConfig.set_start_on_boot(True)
 
     setup_http_proxy(config)
     check_account_name_and_password(config)
@@ -914,7 +915,8 @@ def main(args, print=print):
 
     # Disable startup on boot and stop the client, if one is running.
     if config.disable:
-        stop_client_and_disable_init_script()
+        stop_client()
+        print("landscape-client.service must still be disables from the NixOS configuration file.")
         return
 
     # Setup client configuration.

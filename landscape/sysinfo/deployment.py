@@ -31,7 +31,7 @@ class SysInfoConfiguration(BaseConfiguration):
 
     version = VERSION
 
-    default_config_filenames = ("/etc/landscape/client.conf",)
+    default_config_filenames = (f"{os.path.expanduser('~')}/.config/landscape/client.conf",)
     if os.getuid() != 0:
         default_config_filenames += (
             os.path.expanduser("~/.landscape/sysinfo.conf"),
