@@ -15,7 +15,7 @@ UBUNTU_PATH = ":".join(
         "/usr/bin",
         "/sbin",
         "/bin",
-        "/snap/bin",
+        # "/snap/bin",
     ],
 )
 
