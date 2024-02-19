@@ -11,7 +11,7 @@ PACKAGES = [
     "landscape.client.broker",
     "landscape.client.manager",
     "landscape.client.monitor",
-    "landscape.client.package",
+    # "landscape.client.package",
     # "landscape.client.snap",
     "landscape.client.upgraders",
     "landscape.client.user",
@@ -25,7 +25,7 @@ MODULES = [
     "landscape.client.patch",
     "landscape.client.reactor",
     "landscape.client.service",
-    "landscape.client.sysvconfig",
+    # "landscape.client.sysvconfig",
     "landscape.client.watchdog",
 ]
 SCRIPTS = []
