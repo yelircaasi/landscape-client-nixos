@@ -1,11 +1,12 @@
+import logging
+
 from twisted.python.reflect import namedClass
 
 from landscape.client.amp import ComponentPublisher
 from landscape.client.broker.amp import RemoteBrokerConnector
 from landscape.client.manager.config import ManagerConfiguration
 from landscape.client.manager.manager import Manager
-from landscape.client.service import LandscapeService
-from landscape.client.service import run_landscape_service
+from landscape.client.service import LandscapeService, run_landscape_service
 
 
 class ManagerService(LandscapeService):
@@ -28,13 +29,25 @@ class ManagerService(LandscapeService):
 
     def get_plugins(self):
         """Return instances of all the plugins enabled in the configuration."""
-        return [
-            namedClass(
-                "landscape.client.manager."
-                f"{plugin_name.lower()}.{plugin_name}",
-            )()
-            for plugin_name in self.config.plugin_factories
-        ]
+        plugins = []
+        for plugin_name in self.config.plugin_factories:
+            try:
+                plugin = namedClass(
+                    "landscape.client.manager."
+                    f"{plugin_name.lower()}.{plugin_name}",
+                )
+                plugins.append(plugin())
+            except:
+                logging.warning(f"Plugin not found: {plugin_name}.")
+
+        return plugins
+        # return [
+        #     namedClass(
+        #         "landscape.client.manager."
+        #         f"{plugin_name.lower()}.{plugin_name}",
+        #     )()
+        #     for plugin_name in self.config.plugin_factories
+        # ]
 
     def startService(self):  # noqa: N802
         """Start the manager service.
