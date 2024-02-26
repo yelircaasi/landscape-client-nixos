@@ -8,8 +8,7 @@ from landscape.client.amp import ComponentPublisher
 from landscape.client.broker.amp import RemoteBrokerConnector
 from landscape.client.monitor.config import MonitorConfiguration
 from landscape.client.monitor.monitor import Monitor
-from landscape.client.service import LandscapeService
-from landscape.client.service import run_landscape_service
+from landscape.client.service import LandscapeService, run_landscape_service
 
 
 class MonitorService(LandscapeService):
@@ -51,9 +50,8 @@ class MonitorService(LandscapeService):
                 plugins.append(plugin())
             except ModuleNotFoundError:
                 logging.warning(
-                    "Invalid monitor plugin specified: '{}'. "
+                    f"Invalid monitor plugin specified: '{plugin_name}'. "
                     "See `example.conf` for a full list of monitor plugins.",
-                    plugin_name,
                 )
 
         return plugins
