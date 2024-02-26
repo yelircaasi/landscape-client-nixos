@@ -10,30 +10,28 @@ import pwd
 import signal
 import sys
 import time
-from logging import error
-from logging import info
-from logging import warning
-from resource import RLIMIT_NOFILE
-from resource import setrlimit
+from logging import error, info, warning
+from resource import RLIMIT_NOFILE, setrlimit
 
 from twisted.application.app import startApplication
-from twisted.application.service import Application
-from twisted.application.service import Service
+from twisted.application.service import Application, Service
 from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.defer import succeed
+from twisted.internet.defer import Deferred, succeed
 from twisted.internet.error import ProcessExitedAlready
 from twisted.internet.protocol import ProcessProtocol
 
-from landscape.client.broker.amp import RemoteBrokerConnector
-from landscape.client.broker.amp import RemoteManagerConnector
-from landscape.client.broker.amp import RemoteMonitorConnector
-from landscape.client.deployment import Configuration
-from landscape.client.deployment import init_logging
+from landscape.client.broker.amp import (
+    RemoteBrokerConnector,
+    RemoteManagerConnector,
+    RemoteMonitorConnector,
+)
+from landscape.client.deployment import Configuration, init_logging
 from landscape.client.reactor import LandscapeReactor
-from landscape.lib.bootstrap import BootstrapDirectory
-from landscape.lib.bootstrap import BootstrapFile
-from landscape.lib.bootstrap import BootstrapList
+from landscape.lib.bootstrap import (
+    BootstrapDirectory,
+    BootstrapFile,
+    BootstrapList,
+)
 from landscape.lib.config import get_bindir
 from landscape.lib.encoding import encode_values
 from landscape.lib.log import log_failure
@@ -568,7 +566,6 @@ class WatchDogService(Service):
             log_dir=self._config.log_dir,
         )
         if self._config.clones > 0:
-
             # Let clones open an appropriate number of fds
             setrlimit(
                 RLIMIT_NOFILE,
